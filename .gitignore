@@ -1,0 +1,10 @@
+node_modules/
+release/
+data/
+$tmp/
+_backup_*/
+_开发脚本/
+*.exe
+*.log
+489
+c

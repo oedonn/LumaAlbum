@@ -1,0 +1,71 @@
+{
+  "name": "smart-album",
+  "productName": "Luma Album",
+  "version": "1.0.0",
+  "description": "Luma Album · 本地智能相册：图片 / 视频 / 实况 / 压缩包 整理工具",
+  "main": "electron/main.js",
+  "author": "Smart Album",
+  "license": "MIT",
+  "scripts": {
+    "start": "electron .",
+    "dist": "electron-builder --win portable --x64"
+  },
+  "dependencies": {
+    "@ffmpeg-installer/ffmpeg": "^1.1.0",
+    "exifr": "^7.1.3",
+    "jpeg-js": "^0.4.4",
+    "libheif-js": "^1.23.5",
+    "pdfjs-dist": "^3.11.174"
+  },
+  "devDependencies": {
+    "electron": "^39.2.6",
+    "electron-builder": "^25.1.8"
+  },
+  "build": {
+    "appId": "com.luma.album",
+    "productName": "Luma Album",
+    "directories": {
+      "output": "release",
+      "buildResources": "build"
+    },
+    "files": [
+      "renderer/**/*",
+      "electron/**/*",
+      "package.json"
+    ],
+    "electronDist": "node_modules/electron/dist",
+    "asar": true,
+    "asarUnpack": [
+      "electron/heic-worker.js",
+      "node_modules/libheif-js/**",
+      "node_modules/jpeg-js/**"
+    ],
+    "compression": "normal",
+    "extraResources": [
+      {
+        "from": "node_modules/@ffmpeg-installer/win32-x64/ffmpeg.exe",
+        "to": "ffmpeg.exe"
+      },
+      {
+        "from": "node_modules/7zip-bin/win/x64/7za.exe",
+        "to": "7za.exe"
+      }
+    ],
+    "win": {
+      "icon": "build/icon.ico",
+      "signAndEditExecutable": false,
+      "target": [
+        {
+          "target": "portable",
+          "arch": [
+            "x64"
+          ]
+        }
+      ]
+    },
+    "portable": {
+      "artifactName": "LumaAlbum.exe",
+      "requestExecutionLevel": "user"
+    }
+  }
+}
